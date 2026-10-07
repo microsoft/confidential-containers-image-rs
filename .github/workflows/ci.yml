@@ -15,12 +15,12 @@ jobs:
           - nightly
     steps:
       - name: Code checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
         with:
           fetch-depth: 1
 
       - name: Install Rust toolchain (${{ matrix.rust }})
-        uses: actions-rs/toolchain@v1
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
           profile: minimal
           toolchain: ${{ matrix.rust }}
@@ -32,7 +32,7 @@ jobs:
           sudo apt install clang llvm pkg-config nettle-dev protobuf-compiler libprotobuf-dev
 
       - name: Run cargo build
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
         with:
           command: build
           args: --features default
@@ -42,13 +42,13 @@ jobs:
           sudo -E PATH=$PATH -s cargo test --all --features default
 
       - name: Run cargo fmt check
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
         with:
           command: fmt
           args: --all -- --check
 
       - name: Run rust lint check
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
         with:
           command: clippy
           args: -- -D warnings
